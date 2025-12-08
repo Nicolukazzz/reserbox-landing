@@ -33,9 +33,11 @@ async function getCollection() {
     const uri = process.env.MONGODB_URI || process.env.MONGO_URL || "";
     if (!uri) throw new Error("MongoDB URI not configured");
 
+    const dbName = process.env.MONGO_DB_NAME || "reserbox_landing";
+
     const client = new MongoClient(uri);
     await client.connect();
-    const db = client.db("reserbox");
+    const db = client.db(dbName);
     return { collection: db.collection<Lead>("leads"), client };
 }
 

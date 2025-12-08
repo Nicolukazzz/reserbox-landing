@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 
 // ============================================================================
 // COUNTRY DATA
@@ -43,29 +43,7 @@ export const COUNTRIES: Country[] = [
 // UTILITIES
 // ============================================================================
 
-export function normalizePhone(phone: string, dialCode: string): string {
-    const digits = phone.replace(/\D/g, "");
-    if (!digits) return "";
-    if (digits.startsWith(dialCode)) return digits;
-    return `${dialCode}${digits}`;
-}
-
-export function parsePhoneNumber(fullNumber: string): { country: Country | null; localNumber: string } {
-    const digits = fullNumber.replace(/\D/g, "");
-    if (!digits) return { country: null, localNumber: "" };
-
-    const sortedCountries = [...COUNTRIES].sort((a, b) => b.dialCode.length - a.dialCode.length);
-
-    for (const country of sortedCountries) {
-        if (digits.startsWith(country.dialCode)) {
-            return { country, localNumber: digits.slice(country.dialCode.length) };
-        }
-    }
-
-    return { country: null, localNumber: digits };
-}
-
-export function formatPhoneDisplay(phone: string): string {
+function formatPhoneDisplay(phone: string): string {
     const digits = phone.replace(/\D/g, "");
     if (!digits) return "";
     if (digits.length <= 3) return digits;
@@ -105,14 +83,11 @@ export function PhoneInput({
     size = "md",
     error,
 }: PhoneInputProps) {
-    const parsed = useMemo(() => parsePhoneNumber(value), [value]);
+    // Find default country
+    const defaultCountryObj = COUNTRIES.find(c => c.code === defaultCountry) || COUNTRIES[0];
 
-    const [selectedCountry, setSelectedCountry] = useState<Country>(() => {
-        if (parsed.country) return parsed.country;
-        return COUNTRIES.find(c => c.code === defaultCountry) || COUNTRIES[0];
-    });
-
-    const [localNumber, setLocalNumber] = useState(parsed.localNumber);
+    const [selectedCountry, setSelectedCountry] = useState<Country>(defaultCountryObj);
+    const [localNumber, setLocalNumber] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
 
@@ -147,36 +122,23 @@ export function PhoneInput({
         }
     }, [isOpen]);
 
-    // Update parent when country or number changes
-    useEffect(() => {
-        const fullNumber = normalizePhone(localNumber, selectedCountry.dialCode);
-        if (fullNumber !== value) {
-            onChange(fullNumber);
-        }
-    }, [localNumber, selectedCountry, onChange, value]);
-
-    // Sync from external value changes
-    useEffect(() => {
-        const newParsed = parsePhoneNumber(value);
-        if (newParsed.country && newParsed.country.code !== selectedCountry.code) {
-            setSelectedCountry(newParsed.country);
-        }
-        if (newParsed.localNumber !== localNumber) {
-            setLocalNumber(newParsed.localNumber);
-        }
-    }, [value, selectedCountry.code, localNumber]);
-
-    const handleCountrySelect = (country: Country) => {
+    const handleCountrySelect = useCallback((country: Country) => {
         setSelectedCountry(country);
         setIsOpen(false);
         setSearch("");
+        // Update parent with new country code
+        const fullNumber = localNumber ? `${country.dialCode}${localNumber}` : "";
+        onChange(fullNumber);
         inputRef.current?.focus();
-    };
+    }, [localNumber, onChange]);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
         setLocalNumber(digits);
-    };
+        // Update parent with full number
+        const fullNumber = digits ? `${selectedCountry.dialCode}${digits}` : "";
+        onChange(fullNumber);
+    }, [selectedCountry.dialCode, onChange]);
 
     // Size classes
     const sizeClasses = {
