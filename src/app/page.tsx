@@ -8,6 +8,7 @@ import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { IndustriesSection } from "@/components/landing/IndustriesSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { TrustSection } from "@/components/landing/TrustSection";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { CTASection } from "@/components/landing/CTASection";
 
@@ -21,6 +22,7 @@ export default function LandingPage() {
                 <IndustriesSection />
                 <PricingSection />
                 <TestimonialsSection />
+                <TrustSection />
                 <FAQSection />
                 <CTASection />
             </main>

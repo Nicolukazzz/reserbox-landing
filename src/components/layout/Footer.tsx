@@ -4,7 +4,7 @@ export function Footer() {
     return (
         <footer className="py-12 px-4 border-t border-white/10">
             <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
                     {/* Brand */}
                     <div className="col-span-2 md:col-span-1">
                         <div className="flex items-center gap-2 mb-4">
@@ -18,28 +18,22 @@ export function Footer() {
                         </p>
                     </div>
 
-                    {/* Links */}
+                    {/* Product Links */}
                     <div>
                         <p className="text-sm font-bold text-white mb-4">Producto</p>
                         <ul className="space-y-2">
-                            <li><a href="#features" className="text-sm text-slate-400 hover:text-white">Funciones</a></li>
-                            <li><a href="#pricing" className="text-sm text-slate-400 hover:text-white">Precios</a></li>
-                            <li><Link href="/book/pelu_glamour" className="text-sm text-slate-400 hover:text-white">Demo</Link></li>
+                            <li><a href="#features" className="text-sm text-slate-400 hover:text-white transition-colors">Funciones</a></li>
+                            <li><a href="#industries" className="text-sm text-slate-400 hover:text-white transition-colors">Industrias</a></li>
+                            <li><a href="#pricing" className="text-sm text-slate-400 hover:text-white transition-colors">Precios</a></li>
+                            <li><Link href="/demo" className="text-sm text-slate-400 hover:text-white transition-colors">Ver reserva demostrativa</Link></li>
                         </ul>
                     </div>
 
+                    {/* Company Links */}
                     <div>
                         <p className="text-sm font-bold text-white mb-4">Compañía</p>
                         <ul className="space-y-2">
-                            <li><Link href="/contacto" className="text-sm text-slate-400 hover:text-white">Contacto</Link></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <p className="text-sm font-bold text-white mb-4">Legal</p>
-                        <ul className="space-y-2">
-                            <li><a href="#" className="text-sm text-slate-400 hover:text-white">Privacidad</a></li>
-                            <li><a href="#" className="text-sm text-slate-400 hover:text-white">Términos</a></li>
+                            <li><Link href="/contacto" className="text-sm text-slate-400 hover:text-white transition-colors">Prueba gratis</Link></li>
                         </ul>
                     </div>
                 </div>

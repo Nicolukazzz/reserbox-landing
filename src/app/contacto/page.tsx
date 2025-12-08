@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { PhoneInput } from "@/components/PhoneInput";
 
 // ============================================================================
 // CONTACT FORM PAGE - RESERBOX
@@ -145,14 +146,14 @@ function ContactFormContent() {
                     <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-8">
                         <p className="text-sm text-slate-400 mb-2">Mientras tanto, puedes:</p>
                         <Link
-                            href="/book/pelu_glamour"
+                            href="/demo"
                             className="text-indigo-400 hover:underline"
                         >
-                            Ver una demo en vivo de cómo funciona →
+                            Probar la demo en vivo de cómo funciona →
                         </Link>
                     </div>
                     <Link
-                        href="/landing"
+                        href="/"
                         className="text-slate-400 hover:text-white transition-colors"
                     >
                         ← Volver al inicio
@@ -168,13 +169,13 @@ function ContactFormContent() {
             <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
-                        <Link href="/landing" className="flex items-center gap-2">
+                        <Link href="/" className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                                 <span className="text-white font-bold text-sm">R</span>
                             </div>
                             <span className="text-xl font-bold text-white">Reserbox</span>
                         </Link>
-                        <Link href="/landing" className="text-sm text-slate-300 hover:text-white">
+                        <Link href="/" className="text-sm text-slate-300 hover:text-white">
                             ← Volver
                         </Link>
                     </div>
@@ -221,12 +222,12 @@ function ContactFormContent() {
                                         <label className="block text-sm font-medium text-slate-300 mb-2">
                                             WhatsApp *
                                         </label>
-                                        <input
-                                            type="tel"
+                                        <PhoneInput
                                             value={form.phone}
-                                            onChange={(e) => updateForm("phone", e.target.value)}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-                                            placeholder="Ej: 300 123 4567"
+                                            onChange={(phone) => updateForm("phone", phone)}
+                                            defaultCountry="CO"
+                                            placeholder="300 123 4567"
+                                            size="md"
                                             required
                                         />
                                     </div>
