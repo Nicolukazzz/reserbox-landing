@@ -10,25 +10,24 @@ import {
 
 const FEATURES = [
     {
-        icon: "📅",
-        title: "Agenda online 24/7",
-        description: "Tus clientes reservan cuando quieran, desde cualquier dispositivo. Sin llamadas, sin esperas.",
+        icon: "🌐",
+        title: "Página de reservas online",
+        description: "Tu propia página web donde tus clientes reservan 24/7. Profesional, fácil de compartir y personalizada con tu marca.",
     },
     {
-        icon: "💬",
-        title: "Bot de WhatsApp",
-        description: "Automatiza las reservas por WhatsApp. El bot atiende, agenda y confirma por ti.",
-        proBadge: true,
+        icon: "📅",
+        title: "Calendario inteligente",
+        description: "Visualiza todas tus citas en formato semanal o mensual. Gestiona horarios, bloquea fechas y organiza tu día fácilmente.",
     },
     {
         icon: "🔔",
-        title: "Recordatorios automáticos",
-        description: "Reduce las ausencias un 80%. Enviamos recordatorios automáticos antes de cada cita.",
+        title: "Recordatorios por WhatsApp",
+        description: "Reduce las ausencias hasta un 80%. Envía recordatorios automáticos a tus clientes antes de cada cita.",
     },
     {
         icon: "👥",
         title: "Gestión de clientes",
-        description: "Base de datos completa con historial de citas, preferencias y notas.",
+        description: "Base de datos completa con historial de citas, preferencias y notas de cada cliente.",
     },
     {
         icon: "📊",
@@ -38,7 +37,7 @@ const FEATURES = [
     {
         icon: "👩‍💼",
         title: "Multi-empleado",
-        description: "Gestiona horarios individuales, asigna servicios y controla la disponibilidad.",
+        description: "Gestiona horarios individuales, asigna servicios por empleado y controla la disponibilidad de cada uno.",
     },
 ];
 
@@ -79,17 +78,6 @@ export function FeaturesSection() {
                                         boxShadow: "0 20px 40px -20px rgba(99, 102, 241, 0.3)",
                                     }}
                                 >
-                                    {feature.proBadge && (
-                                        <motion.span
-                                            className="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-medium"
-                                            initial={{ scale: 0 }}
-                                            whileInView={{ scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: 0.3, type: "spring" }}
-                                        >
-                                            Pro
-                                        </motion.span>
-                                    )}
                                     <motion.div
                                         className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform flex-shrink-0"
                                         whileHover={{ rotate: [0, -10, 10, 0] }}

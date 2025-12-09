@@ -70,37 +70,8 @@ const ADDITIONAL_SCREENSHOTS = [
     },
 ];
 
-// Screenshots del móvil/WhatsApp
-const MOBILE_SCREENSHOTS = [
-    {
-        id: "movil-1",
-        image: "/demo-images/20251209_044540000_iOS.png",
-        alt: "Bot de WhatsApp - Bienvenida",
-    },
-    {
-        id: "movil-2",
-        image: "/demo-images/20251209_044543000_iOS.png",
-        alt: "Bot de WhatsApp - Servicios",
-    },
-    {
-        id: "movil-3",
-        image: "/demo-images/20251209_044550000_iOS.png",
-        alt: "Bot de WhatsApp - Selección",
-    },
-    {
-        id: "movil-4",
-        image: "/demo-images/20251209_044603000_iOS.png",
-        alt: "Bot de WhatsApp - Horarios",
-    },
-    {
-        id: "movil-5",
-        image: "/demo-images/20251209_044607000_iOS.png",
-        alt: "Bot de WhatsApp - Confirmación",
-    },
-];
-
 export function DemoGallerySection() {
-    const [activeTab, setActiveTab] = useState<"features" | "desktop" | "whatsapp">("features");
+    const [activeTab, setActiveTab] = useState<"features" | "desktop">("features");
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     return (
@@ -131,7 +102,6 @@ export function DemoGallerySection() {
                         {[
                             { id: "features", label: "Funciones principales", icon: "✨" },
                             { id: "desktop", label: "Vista completa", icon: "🖥️" },
-                            { id: "whatsapp", label: "Bot WhatsApp", icon: "💬" },
                         ].map((tab) => (
                             <button
                                 key={tab.id}
@@ -252,56 +222,6 @@ export function DemoGallerySection() {
                                         </div>
                                     </motion.div>
                                 ))}
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {activeTab === "whatsapp" && (
-                        <motion.div
-                            key="whatsapp"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            {/* WhatsApp screenshots - móvil style */}
-                            <div className="flex flex-col items-center">
-                                <div className="mb-6 text-center">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                                        <span className="text-emerald-400 text-2xl">💬</span>
-                                        <span className="text-emerald-200 text-sm">Tus clientes reservan directo por WhatsApp</span>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 px-4 -mx-4 scrollbar-hide max-w-full">
-                                    {MOBILE_SCREENSHOTS.map((screenshot, i) => (
-                                        <motion.div
-                                            key={screenshot.id}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: i * 0.1 }}
-                                            onClick={() => setSelectedImage(screenshot.image)}
-                                            className="flex-shrink-0 group relative w-[180px] sm:w-[220px] rounded-2xl overflow-hidden cursor-pointer border-2 border-white/10 hover:border-emerald-500/50 transition-all shadow-xl hover:shadow-emerald-500/20"
-                                        >
-                                            {/* Phone frame effect */}
-                                            <div className="relative aspect-[9/19.5] bg-slate-800">
-                                                <Image
-                                                    src={screenshot.image}
-                                                    alt={screenshot.alt}
-                                                    fill
-                                                    className="object-cover group-hover:scale-[1.02] transition-transform"
-                                                />
-                                            </div>
-                                            <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-slate-900 to-transparent">
-                                                <p className="text-xs text-white/70 text-center truncate">{screenshot.alt}</p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-
-                                <p className="text-sm text-slate-500 mt-4 text-center">
-                                    ← Desliza para ver más capturas →
-                                </p>
                             </div>
                         </motion.div>
                     )}

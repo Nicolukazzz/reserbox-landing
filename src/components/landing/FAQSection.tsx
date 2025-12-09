@@ -15,12 +15,16 @@ const FAQS = [
         a: "Menos de 10 minutos. Solo necesitas agregar tus servicios, empleados y horarios. ¡Listo para recibir reservas!",
     },
     {
-        q: "¿Cómo funciona el bot de WhatsApp?",
-        a: "El bot se conecta a tu WhatsApp Business y responde automáticamente. Tus clientes pueden reservar, consultar disponibilidad y recibir recordatorios directamente en WhatsApp.",
+        q: "¿Cómo funciona la página de reservas?",
+        a: "Tu página de reservas es un link personalizado que puedes compartir con tus clientes. Ellos eligen servicio, fecha, hora y empleado. Tú recibes la reserva automáticamente en tu tablero.",
     },
     {
-        q: "¿Puedo empezar con Básico y luego subir a Pro?",
-        a: "¡Por supuesto! Puedes cambiar de plan en cualquier momento. Tus datos se conservan.",
+        q: "¿Cómo funcionan los recordatorios por WhatsApp?",
+        a: "Una vez configurado, el sistema envía recordatorios automáticos a tus clientes antes de su cita (24 horas y 1 hora antes). Esto reduce las ausencias hasta un 80%.",
+    },
+    {
+        q: "¿Puedo cambiar de plan más adelante?",
+        a: "¡Por supuesto! Puedes cambiar de plan en cualquier momento según crezca tu equipo. Tus datos se conservan.",
     },
     {
         q: "¿Hay contrato o permanencia mínima?",
@@ -28,7 +32,7 @@ const FAQS = [
     },
     {
         q: "¿Cómo es el proceso de configuración inicial?",
-        a: "Después de registrarte, agendamos una reunión virtual para configurar tu cuenta juntos y resolver todas tus dudas. ¡Te acompañamos paso a paso!",
+        a: "Después de registrarte, agendamos una videollamada contigo para configurar tu cuenta juntos y resolver todas tus dudas. ¡Te acompañamos paso a paso!",
     },
 ];
 

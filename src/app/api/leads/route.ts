@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { MongoClient, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
+import { connectToDatabase, COLLECTIONS } from "@/lib/mongodb";
 
 export const dynamic = "force-dynamic";
 
@@ -28,19 +29,6 @@ interface Lead {
     notes?: string;
 }
 
-// MongoDB connection
-async function getCollection() {
-    const uri = process.env.MONGODB_URI || process.env.MONGO_URL || "";
-    if (!uri) throw new Error("MongoDB URI not configured");
-
-    const dbName = process.env.MONGO_DB_NAME || "reserbox_landing";
-
-    const client = new MongoClient(uri);
-    await client.connect();
-    const db = client.db(dbName);
-    return { collection: db.collection<Lead>("leads"), client };
-}
-
 // Send WhatsApp notification using Meta API
 async function sendWhatsAppNotification(lead: Lead) {
     const token = process.env.META_WHATSAPP_TOKEN;
@@ -51,6 +39,14 @@ async function sendWhatsAppNotification(lead: Lead) {
         console.log("WhatsApp notification not configured, skipping...");
         return false;
     }
+
+    // Get plan name for display
+    const planNames: Record<string, string> = {
+        emprendedor: "EMPRENDEDOR ($39k)",
+        profesional: "PROFESIONAL ($69k)",
+        negocio: "NEGOCIO ($99k)",
+    };
+    const planDisplay = planNames[lead.plan] || lead.plan.toUpperCase();
 
     const message = `🚀 *NUEVO LEAD RESERBOX*
 
@@ -63,7 +59,7 @@ async function sendWhatsAppNotification(lead: Lead) {
 🏷️ ${lead.industry}
 👥 ${lead.employeeCount || "No especificado"}
 
-💰 *Plan:* ${lead.plan === "pro" ? "PRO ($99k)" : "BÁSICO ($49k)"}
+💰 *Plan:* ${planDisplay}
 📣 Fuente: ${lead.howFound || "No especificado"}
 
 ${lead.message ? `💬 Mensaje: ${lead.message}` : ""}
@@ -117,7 +113,8 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const { collection, client } = await getCollection();
+        const { db } = await connectToDatabase();
+        const collection = db.collection<Lead>(COLLECTIONS.LEADS);
 
         // Create lead document
         const lead: Lead = {
@@ -143,7 +140,6 @@ export async function POST(request: NextRequest) {
         });
 
         if (existing) {
-            await client.close();
             return NextResponse.json(
                 { ok: false, error: "Ya recibimos tu solicitud. Te contactaremos pronto." },
                 { status: 409 }
@@ -152,7 +148,6 @@ export async function POST(request: NextRequest) {
 
         // Insert lead
         const result = await collection.insertOne(lead);
-        await client.close();
 
         // Send WhatsApp notification (async, don't wait)
         sendWhatsAppNotification(lead).catch(console.error);
@@ -177,7 +172,8 @@ export async function GET(request: NextRequest) {
         const { searchParams } = new URL(request.url);
         const status = searchParams.get("status");
 
-        const { collection, client } = await getCollection();
+        const { db } = await connectToDatabase();
+        const collection = db.collection<Lead>(COLLECTIONS.LEADS);
 
         const query = status ? { status: status as Lead["status"] } : {};
         const leads = await collection
@@ -185,8 +181,6 @@ export async function GET(request: NextRequest) {
             .sort({ createdAt: -1 })
             .limit(100)
             .toArray();
-
-        await client.close();
 
         return NextResponse.json({ ok: true, data: leads });
     } catch (error) {

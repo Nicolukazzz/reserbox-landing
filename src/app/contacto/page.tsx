@@ -4,6 +4,8 @@ import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PhoneInput } from "@/components/PhoneInput";
+import { PlanSelector } from "@/components/plans";
+import { usePlans } from "@/hooks/usePlans";
 
 // ============================================================================
 // CONTACT FORM PAGE - RESERBOX
@@ -56,6 +58,8 @@ function ContactFormContent() {
     const searchParams = useSearchParams();
     const preselectedPlan = searchParams.get("plan") || "";
 
+    const { plans, loading: plansLoading } = usePlans();
+
     const [form, setForm] = useState<FormData>({
         name: "",
         email: "",
@@ -64,7 +68,7 @@ function ContactFormContent() {
         industry: "",
         employeeCount: "",
         city: "",
-        plan: preselectedPlan === "pro" ? "pro" : preselectedPlan === "basico" ? "basico" : "",
+        plan: "",
         howFound: "",
         message: "",
     });
@@ -73,12 +77,16 @@ function ContactFormContent() {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
 
-    // Update plan if URL param changes
+    // Update plan when URL param changes or plans load
     useEffect(() => {
-        if (preselectedPlan) {
-            setForm(prev => ({ ...prev, plan: preselectedPlan }));
+        if (preselectedPlan && plans.length > 0) {
+            // Verify the plan exists
+            const planExists = plans.some(p => p.slug === preselectedPlan);
+            if (planExists) {
+                setForm(prev => ({ ...prev, plan: preselectedPlan }));
+            }
         }
-    }, [preselectedPlan]);
+    }, [preselectedPlan, plans]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -318,45 +326,18 @@ function ContactFormContent() {
                             </div>
                         </section>
 
-                        {/* Plan Selection */}
+                        {/* Plan Selection - Now Dynamic */}
                         <section>
                             <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                                 <span className="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 text-sm flex items-center justify-center">3</span>
                                 ¿Qué plan te interesa?
                             </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <button
-                                    type="button"
-                                    onClick={() => updateForm("plan", "basico")}
-                                    className={`p-4 rounded-xl border-2 text-left transition-all ${form.plan === "basico"
-                                        ? "border-indigo-500 bg-indigo-500/10"
-                                        : "border-white/10 bg-white/5 hover:border-white/20"
-                                        }`}
-                                >
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="font-semibold text-white">Básico</span>
-                                        <span className="text-sm text-slate-400">$49.000/mes</span>
-                                    </div>
-                                    <p className="text-sm text-slate-400">Dashboard + Página de reservas</p>
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => updateForm("plan", "pro")}
-                                    className={`p-4 rounded-xl border-2 text-left transition-all relative ${form.plan === "pro"
-                                        ? "border-indigo-500 bg-indigo-500/10"
-                                        : "border-white/10 bg-white/5 hover:border-white/20"
-                                        }`}
-                                >
-                                    <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs">
-                                        Recomendado
-                                    </span>
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="font-semibold text-white">Pro</span>
-                                        <span className="text-sm text-slate-400">$99.000/mes</span>
-                                    </div>
-                                    <p className="text-sm text-slate-400">Todo + Bot de WhatsApp</p>
-                                </button>
-                            </div>
+                            <PlanSelector
+                                plans={plans}
+                                selectedPlan={form.plan}
+                                onSelectPlan={(slug) => updateForm("plan", slug)}
+                                loading={plansLoading}
+                            />
                         </section>
 
                         {/* Additional Info */}

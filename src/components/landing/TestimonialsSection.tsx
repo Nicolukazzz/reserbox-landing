@@ -16,7 +16,7 @@ const TESTIMONIALS = [
         avatar: "👩",
     },
     {
-        quote: "El bot de WhatsApp me ahorra horas al día. Mis clientes reservan solos y yo me enfoco en atenderlos.",
+        quote: "Mis clientes ahora reservan desde la página a cualquier hora. Ya no pierdo tiempo contestando llamadas.",
         author: "Carlos Mendoza",
         role: "Barbería El Clásico",
         avatar: "👨",

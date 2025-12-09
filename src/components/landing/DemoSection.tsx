@@ -7,7 +7,7 @@ import {
     StaggerContainer,
     StaggerItem,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const DEMO_SCREENS = [
     {

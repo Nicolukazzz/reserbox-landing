@@ -43,7 +43,7 @@ export function HeroSection() {
                 {/* Headline */}
                 <FadeInUp delay={0.1}>
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight mb-6">
-                        El software de reservas que
+                        Tu agenda online
                         <br />
                         <motion.span
                             className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent inline-block"
@@ -59,7 +59,7 @@ export function HeroSection() {
                                 backgroundSize: "200% 200%",
                             }}
                         >
-                            conecta con WhatsApp
+                            disponible 24/7
                         </motion.span>
                     </h1>
                 </FadeInUp>
@@ -67,8 +67,8 @@ export function HeroSection() {
                 {/* Subheadline */}
                 <FadeInUp delay={0.2}>
                     <p className="text-xl sm:text-2xl text-slate-300 max-w-2xl mx-auto mb-6">
-                        Automatiza tu agenda, recibe reservas 24/7 y envía recordatorios automáticos.
-                        Todo desde un tablero fácil de usar.
+                        Ofrece una página de reservas profesional a tus clientes.
+                        Gestiona tu negocio y envía recordatorios automáticos por WhatsApp.
                     </p>
                 </FadeInUp>
 
@@ -124,7 +124,7 @@ export function HeroSection() {
                                 href="/demo"
                                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all text-center inline-block"
                             >
-                                Ver reserva demostrativa
+                                Ver página de reservas demo
                             </Link>
                         </motion.div>
                     </div>
