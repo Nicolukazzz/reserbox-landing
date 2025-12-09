@@ -6,7 +6,7 @@ import {
     StaggerItem,
     HoverCard,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const TESTIMONIALS = [
     {

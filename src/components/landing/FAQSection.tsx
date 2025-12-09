@@ -6,7 +6,7 @@ import {
     StaggerContainer,
     StaggerItem,
     motion
-} from "@/components/animations";
+} from "../animations";
 import { AnimatePresence } from "framer-motion";
 
 const FAQS = [
@@ -27,8 +27,8 @@ const FAQS = [
         a: "No. Pagas mes a mes y puedes cancelar cuando quieras. Sin letra pequeña.",
     },
     {
-        q: "¿Cómo es el proceso de onboarding?",
-        a: "Después de registrarte, agendamos una reunión virtual para configurar tu cuenta juntos y resolver todas tus dudas.",
+        q: "¿Cómo es el proceso de configuración inicial?",
+        a: "Después de registrarte, agendamos una reunión virtual para configurar tu cuenta juntos y resolver todas tus dudas. ¡Te acompañamos paso a paso!",
     },
 ];
 
@@ -47,7 +47,7 @@ export function FAQSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        FAQ
+                        Dudas
                     </motion.p>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
                         Preguntas frecuentes

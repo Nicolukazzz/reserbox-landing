@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export function Footer() {
     return (
-        <footer className="py-12 px-4 border-t border-white/10">
+        <footer className="py-8 sm:py-12 px-4 border-t border-white/10">
             <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
                     {/* Brand */}
-                    <div className="col-span-2 md:col-span-1">
+                    <div className="sm:col-span-2 md:col-span-1">
                         <div className="flex items-center gap-2 mb-4">
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                                 <span className="text-white font-bold text-sm">R</span>
@@ -34,12 +34,13 @@ export function Footer() {
                         <p className="text-sm font-bold text-white mb-4">Compañía</p>
                         <ul className="space-y-2">
                             <li><Link href="/contacto" className="text-sm text-slate-400 hover:text-white transition-colors">Prueba gratis</Link></li>
+                            <li><a href="#faq" className="text-sm text-slate-400 hover:text-white transition-colors">Preguntas frecuentes</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/10 text-center">
-                    <p className="text-sm text-slate-500">
+                <div className="pt-6 sm:pt-8 border-t border-white/10 text-center">
+                    <p className="text-xs sm:text-sm text-slate-500">
                         © 2025 Reserbox. Todos los derechos reservados.
                     </p>
                 </div>
@@ -47,3 +48,4 @@ export function Footer() {
         </footer>
     );
 }
+

@@ -9,7 +9,7 @@ import {
     StaggerItem,
     HoverCard,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const PLANS = [
     {
@@ -19,7 +19,7 @@ const PLANS = [
         period: "/mes",
         description: "Todo lo esencial para tu negocio",
         features: [
-            "Dashboard completo",
+            "Tablero completo",
             "Página de reservas online",
             "Gestión de empleados",
             "Gestión de servicios",

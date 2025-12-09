@@ -5,7 +5,7 @@ import {
     FadeInUp,
     Floating,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 export function CTASection() {
     return (

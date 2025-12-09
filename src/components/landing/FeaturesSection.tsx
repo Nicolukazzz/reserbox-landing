@@ -6,7 +6,7 @@ import {
     StaggerItem,
     HoverCard,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const FEATURES = [
     {
@@ -32,8 +32,8 @@ const FEATURES = [
     },
     {
         icon: "📊",
-        title: "Dashboard analítico",
-        description: "Métricas en tiempo real: ingresos, servicios populares, rendimiento del equipo.",
+        title: "Tablero de estadísticas",
+        description: "Métricas en tiempo real: ingresos, servicios más solicitados, rendimiento del equipo.",
     },
     {
         icon: "👩‍💼",

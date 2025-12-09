@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { IndustriesSection } from "@/components/landing/IndustriesSection";
+import { DemoGallerySection } from "@/components/landing/DemoGallerySection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { TrustSection } from "@/components/landing/TrustSection";
@@ -20,6 +21,7 @@ export default function LandingPage() {
                 <HeroSection />
                 <FeaturesSection />
                 <IndustriesSection />
+                <DemoGallerySection />
                 <PricingSection />
                 <TestimonialsSection />
                 <TrustSection />

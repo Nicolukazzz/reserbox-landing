@@ -6,15 +6,15 @@ import {
     StaggerItem,
     HoverCard,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const INDUSTRIES = [
     { icon: "💇‍♀️", name: "Salones de belleza", color: "from-pink-500 to-rose-600" },
     { icon: "💈", name: "Barberías", color: "from-blue-500 to-indigo-600" },
     { icon: "💅", name: "Manicure & Spa", color: "from-purple-500 to-violet-600" },
     { icon: "🏥", name: "Consultorios", color: "from-emerald-500 to-teal-600" },
-    { icon: "🧘", name: "Centros de bienestar", color: "from-amber-500 to-orange-600" },
-    { icon: "📸", name: "Estudios foto", color: "from-cyan-500 to-blue-600" },
+    { icon: "🧘", name: "Psicología", color: "from-amber-500 to-orange-600" },
+    { icon: "📸", name: "Foto estudio", color: "from-cyan-500 to-blue-600" },
 ];
 
 export function IndustriesSection() {
@@ -40,22 +40,22 @@ export function IndustriesSection() {
                     </p>
                 </FadeInUp>
 
-                {/* Industries grid */}
+                {/* Industries grid - Responsive: 2 cols móvil, 3 tablet, 6 desktop */}
                 <StaggerContainer
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+                    className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4"
                     staggerDelay={0.08}
                 >
                     {INDUSTRIES.map((industry, i) => (
                         <StaggerItem key={i} direction="scale">
                             <HoverCard scale={1.08} lift={-10}>
                                 <motion.div
-                                    className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all text-center cursor-pointer h-full"
+                                    className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all text-center cursor-pointer h-full min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center"
                                     whileHover={{
                                         boxShadow: "0 15px 30px -15px rgba(99, 102, 241, 0.25)",
                                     }}
                                 >
                                     <motion.div
-                                        className={`w-14 h-14 mx-auto rounded-xl bg-gradient-to-br ${industry.color} flex items-center justify-center text-2xl mb-3 shadow-lg`}
+                                        className={`w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-lg sm:rounded-xl bg-gradient-to-br ${industry.color} flex items-center justify-center text-xl sm:text-2xl mb-2 sm:mb-3 shadow-lg`}
                                         whileHover={{
                                             scale: 1.15,
                                             rotate: 5,
@@ -64,7 +64,7 @@ export function IndustriesSection() {
                                     >
                                         {industry.icon}
                                     </motion.div>
-                                    <p className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">{industry.name}</p>
+                                    <p className="text-xs sm:text-sm font-bold text-white group-hover:text-indigo-400 transition-colors leading-tight">{industry.name}</p>
                                 </motion.div>
                             </HoverCard>
                         </StaggerItem>

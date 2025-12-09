@@ -7,7 +7,7 @@ import {
     StaggerContainer,
     StaggerItem,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 const TRUST_ITEMS = [
     {
@@ -59,8 +59,8 @@ export function TrustSection() {
                     </p>
                 </FadeInUp>
 
-                {/* Trust grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                {/* Trust grid - Responsive */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12 sm:mb-16">
                     {TRUST_ITEMS.map((item, i) => {
                         const isLeft = i % 2 === 0;
                         const AnimWrapper = isLeft ? FadeInLeft : FadeInRight;
@@ -68,24 +68,24 @@ export function TrustSection() {
                         return (
                             <AnimWrapper key={i} delay={i * 0.1}>
                                 <motion.div
-                                    className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all h-full"
+                                    className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all h-full"
                                     whileHover={{
                                         scale: 1.02,
                                         boxShadow: "0 20px 40px -20px rgba(99, 102, 241, 0.2)",
                                     }}
                                 >
-                                    <div className="flex items-start gap-4">
+                                    <div className="flex items-start gap-3 sm:gap-4">
                                         <motion.div
-                                            className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-2xl flex-shrink-0 shadow-lg`}
+                                            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-xl sm:text-2xl flex-shrink-0 shadow-lg`}
                                             whileHover={{ rotate: 5, scale: 1.1 }}
                                         >
                                             {item.icon}
                                         </motion.div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
+                                            <h3 className="text-base sm:text-xl font-bold text-white mb-1 sm:mb-2 group-hover:text-indigo-400 transition-colors">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                                            <p className="text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                                                 {item.description}
                                             </p>
                                         </div>

@@ -25,7 +25,7 @@ export function Navbar() {
         { href: "#features", label: "Funciones" },
         { href: "#industries", label: "Industrias" },
         { href: "#pricing", label: "Precios" },
-        { href: "#faq", label: "FAQ" },
+        { href: "#faq", label: "Dudas" },
     ];
 
     return (

@@ -11,7 +11,7 @@ import {
     Floating,
     PulsingGlow,
     motion
-} from "@/components/animations";
+} from "../animations";
 
 export function HeroSection() {
     return (
@@ -68,7 +68,7 @@ export function HeroSection() {
                 <FadeInUp delay={0.2}>
                     <p className="text-xl sm:text-2xl text-slate-300 max-w-2xl mx-auto mb-6">
                         Automatiza tu agenda, recibe reservas 24/7 y envía recordatorios automáticos.
-                        Todo desde un dashboard intuitivo.
+                        Todo desde un tablero fácil de usar.
                     </p>
                 </FadeInUp>
 
