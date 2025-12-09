@@ -33,28 +33,54 @@ export function PlanCard({
 }: PlanCardProps) {
     // Compact variant for contact form
     if (variant === "compact") {
+        const isHighlighted = plan.highlighted && plan.highlightLabel;
+
         return (
-            <button
+            <motion.button
                 type="button"
                 onClick={() => onSelect?.(plan)}
-                className={`p-4 rounded-xl border-2 text-left transition-all relative w-full ${selected
-                        ? "border-indigo-500 bg-indigo-500/10"
-                        : "border-white/10 bg-white/5 hover:border-white/20"
-                    }`}
+                className={`
+                    relative p-5 rounded-xl border-2 text-left transition-all w-full
+                    ${isHighlighted ? "pt-7" : ""}
+                    ${selected
+                        ? "border-indigo-500 bg-indigo-500/15"
+                        : "border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/[0.08]"
+                    }
+                `}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: animationDelay * 0.05 }}
             >
-                {plan.highlighted && plan.highlightLabel && (
-                    <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs">
+                {/* Highlighted badge */}
+                {isHighlighted && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-medium whitespace-nowrap z-10">
                         {plan.highlightLabel}
                     </span>
                 )}
-                <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-white">{plan.name}</span>
-                    <span className="text-sm text-slate-400">
-                        {formatPrice(plan.price, plan.currency)}{plan.period}
-                    </span>
+
+                {/* Selected checkmark */}
+                {selected && (
+                    <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                )}
+
+                {/* Plan name and price - stacked layout */}
+                <div className="space-y-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="font-bold text-white text-lg">{plan.name}</span>
+                        <span className="text-indigo-400 font-semibold">
+                            {formatPrice(plan.price, plan.currency)}
+                            <span className="text-slate-500 font-normal text-sm">{plan.period}</span>
+                        </span>
+                    </div>
+                    <p className="text-sm text-slate-400">{plan.subtitle}</p>
                 </div>
-                <p className="text-sm text-slate-400">{plan.subtitle}</p>
-            </button>
+            </motion.button>
         );
     }
 
